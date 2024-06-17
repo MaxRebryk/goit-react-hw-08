@@ -2,10 +2,7 @@ import Contact from "../Contact/Contact";
 import { useDispatch, useSelector } from "react-redux";
 import { selectContacts } from "../../redux/contacts/selectors";
 import { deleteContact } from "../../redux/contacts/operations";
-import {
-  selectFilteredcontacts,
-  selectNameFilter,
-} from "../../redux/filtersSlice";
+import { selectFilteredcontacts } from "../../redux/contacts/selectors";
 import { useEffect } from "react";
 
 export default function ContactList() {
