@@ -43,7 +43,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route
-              redirectTo="/tasks"
+              path="/contacts"
               element={
                 <PrivateRoute
                   redirectTo="/login"
