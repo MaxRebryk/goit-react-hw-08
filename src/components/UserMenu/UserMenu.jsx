@@ -5,10 +5,10 @@ import { logout } from "../../redux/auth/operations";
 
 export default function UserMenu() {
   const user = useSelector(selectUser);
-
+  const token = useSelector(selectToken);
   const dispatch = useDispatch();
   const handleLogout = () => {
-    dispatch(logout(selectToken));
+    dispatch(logout(token));
   };
 
   return (

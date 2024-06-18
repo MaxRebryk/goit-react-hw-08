@@ -1,0 +1,10 @@
+.navigation {
+  width: 1128px;
+  position: fixed;
+  top: 0%;
+  left: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

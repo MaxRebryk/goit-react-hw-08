@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
-import css from "./LoginRegisterNav.module.css";
+import css from "./AuthNav.module.css";
 
-export default function LoginRegisterNav() {
+export default function AuthNav() {
   const buildLinkClass = ({ isActive }) => {
     return clsx(css.link, isActive && css.active);
   };

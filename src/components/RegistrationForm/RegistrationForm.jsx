@@ -3,7 +3,7 @@ import { useId } from "react";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 
-export default function LoginForm() {
+export default function RegistrationForm() {
   const initialValues = { name: "", email: "", password: "" };
   const loginId = useId();
   const passwordId = useId();
