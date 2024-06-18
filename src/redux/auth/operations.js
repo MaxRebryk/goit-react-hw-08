@@ -3,11 +3,20 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://connections-api.goit.global";
 
+const setAuthToken = (token) => {
+  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+};
+
+const clearAuthToken = () => {
+  axios.defaults.headers.common.Authorization = "";
+};
+
 export const register = createAsyncThunk(
   "auth/register",
   async (newUser, thunkApi) => {
     try {
       const response = await axios.post("/users/signup", newUser);
+      setAuthToken(response.data.token);
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -20,6 +29,7 @@ export const login = createAsyncThunk(
   async (newUser, thunkApi) => {
     try {
       const response = await axios.post("/users/login", newUser);
+      setAuthToken(response.data.token);
       return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -27,15 +37,32 @@ export const login = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk(
-  "auth/logout",
-  async (token, thunkApi) => {
+export const logout = createAsyncThunk("auth/logout", async (_, thunkApi) => {
+  try {
+    const response = await axios.post("/users/logout");
+    clearAuthToken();
+    return response.data;
+  } catch (error) {
+    return thunkApi.rejectWithValue(error.message);
+  }
+});
+
+export const refreshUser = createAsyncThunk(
+  "auth/refresh",
+  async (_, thunkApi) => {
     try {
-      const response = await axios.get("/users/logout", {
-        authorization: token,
-      });
+      const reduxState = thunkApi.getState();
+      setAuthToken(reduxState.auth.token);
+      const response = await axios.get("/users/current");
+      return response.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }
+  },
+  {
+    condition(_, thunkApi) {
+      const reduxState = thunkApi.getState();
+      return reduxState.auth.token != null;
+    },
   }
 );
