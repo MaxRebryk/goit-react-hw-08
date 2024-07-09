@@ -5,7 +5,7 @@ import SearchBox from "../../components/SearchBox/SearchBox";
 import { fetchContacts } from "../../redux/contacts/operations";
 import { useEffect } from "react";
 
-export default function ContactsPage() {
+const ContactsPage: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,4 +20,6 @@ export default function ContactsPage() {
       <ContactList />
     </main>
   );
-}
+};
+
+export default ContactsPage;

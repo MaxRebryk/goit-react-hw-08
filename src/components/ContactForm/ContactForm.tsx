@@ -1,15 +1,21 @@
 import { useId } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
-export default function ContactForm() {
-  const nameId = useId();
-  const numberId = useId();
+
+const ContactForm: React.FC = () => {
+  const nameId: string = useId();
+  const numberId: string = useId();
 
   const dispatch = useDispatch();
 
-  const onAdd = (values) => {
+  type InitialValues = {
+    name: string;
+    number: string;
+  };
+
+  const onAdd = (values: InitialValues): void => {
     dispatch(
       addContact({ id: Date.now(), name: values.name, number: values.number })
     );
@@ -26,12 +32,15 @@ export default function ContactForm() {
       .required("Required"),
   });
 
-  const initialValues = {
+  const initialValues: InitialValues = {
     name: "",
     number: "",
   };
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = (
+    values: InitialValues,
+    actions: FormikHelpers<InitialValues>
+  ) => {
     onAdd(values);
     console.log(values);
     actions.resetForm();
@@ -55,4 +64,6 @@ export default function ContactForm() {
       </Formik>
     </>
   );
-}
+};
+
+export default ContactForm;

@@ -2,10 +2,11 @@ import { NavLink } from "react-router-dom";
 import clsx from "clsx";
 import css from "./AuthNav.module.css";
 
-export default function AuthNav() {
-  const buildLinkClass = ({ isActive }) => {
+const AuthNav: React.FC = () => {
+  const buildLinkClass = ({ isActive }: { isActive: boolean }) => {
     return clsx(css.link, isActive && css.active);
   };
+
   return (
     <div className={css.navigation}>
       <nav className={css.nav}>
@@ -18,4 +19,6 @@ export default function AuthNav() {
       </nav>
     </div>
   );
-}
+};
+
+export default AuthNav;

@@ -1,20 +1,29 @@
-import { Field, Formik, Form } from "formik";
+import { Field, Formik, Form, FormikHelpers } from "formik";
 import { useId } from "react";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/operations";
 
+type InitialValues = {
+  name: string;
+  email: string;
+  password: string;
+};
+
 export default function RegistrationForm() {
-  const initialValues = { name: "", email: "", password: "" };
-  const loginId = useId();
-  const passwordId = useId();
-  const nameId = useId();
+  const initialValues: InitialValues = { name: "", email: "", password: "" };
+  const loginId: string = useId();
+  const passwordId: string = useId();
+  const nameId: string = useId();
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = (
+    values: InitialValues,
+    actions: FormikHelpers<InitialValues>
+  ) => {
     dispatch(register(values))
       .unwrap()
-      .catch((error) => {
+      .catch((error: never) => {
         alert(error);
       });
     actions.resetForm();

@@ -2,11 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectNameFilter } from "../../redux/filters/selectors";
 import { changeFilter } from "../../redux/filters/filtersSlice";
 
-export default function SearchBox() {
+const SearchBox: React.FC = () => {
   const dispatch = useDispatch();
-  const filterValue = useSelector(selectNameFilter);
+  const filterValue: string = useSelector(selectNameFilter);
 
-  const onSearch = (event) => {
+  const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(changeFilter(event.target.value));
   };
   return (
@@ -20,4 +20,6 @@ export default function SearchBox() {
       />
     </div>
   );
-}
+};
+
+export default SearchBox;

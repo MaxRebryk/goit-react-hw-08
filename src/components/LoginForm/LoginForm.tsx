@@ -3,14 +3,19 @@ import { useId } from "react";
 import { login } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
 
-export default function LoginForm() {
-  const initialValues = { email: "", password: "" };
-  const loginId = useId();
-  const passwordId = useId();
+type InitialValues = {
+  email: string;
+  password: string;
+};
+
+const LoginForm: React.FC = () => {
+  const initialValues: InitialValues = { email: "", password: "" };
+  const loginId: string = useId();
+  const passwordId: string = useId();
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = (values: InitialValues, actions) => {
     dispatch(login(values))
       .unwrap()
       .catch((error) => {
@@ -30,4 +35,6 @@ export default function LoginForm() {
       </Form>
     </Formik>
   );
-}
+};
+
+export default LoginForm;

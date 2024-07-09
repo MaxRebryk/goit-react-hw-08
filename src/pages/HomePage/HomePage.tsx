@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import css from "./HomePage.module.css";
 import { selectUser } from "../../redux/auth/selectors";
-export default function HomePage() {
+const HomePage = () => {
   const user = useSelector(selectUser);
   return (
     <main>
@@ -16,4 +16,5 @@ export default function HomePage() {
       </div>
     </main>
   );
-}
+};
+export default HomePage;

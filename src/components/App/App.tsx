@@ -12,17 +12,17 @@ import PrivateRoute from "../PrivateRoute";
 import Layout from "../Layout/Layout";
 
 const HomePage = lazy(() => import("../../pages/HomePage/HomePage"));
-const ContactsPage = lazy(() =>
-  import("../../pages/ContactsPage/ContactsPage")
+const ContactsPage = lazy(
+  () => import("../../pages/ContactsPage/ContactsPage")
 );
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
 
-const RegisterPage = lazy(() =>
-  import("../../pages/RegisterPage/RegisterPage")
+const RegisterPage = lazy(
+  () => import("../../pages/RegisterPage/RegisterPage")
 );
 
-const NotFoundPage = lazy(() =>
-  import("../../pages/NotFoundPage/NotFoundPage")
+const NotFoundPage = lazy(
+  () => import("../../pages/NotFoundPage/NotFoundPage")
 );
 
 function App() {

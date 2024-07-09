@@ -1,23 +1,29 @@
 import Contact from "../Contact/Contact";
 import { useDispatch, useSelector } from "react-redux";
-import { selectContacts } from "../../redux/contacts/selectors";
+import { selectContacts } from "../../redux/contacts//selectors";
 import { deleteContact } from "../../redux/contacts/operations";
 import { selectFilteredcontacts } from "../../redux/contacts/selectors";
 import { useEffect } from "react";
 
-export default function ContactList() {
-  const items = useSelector(selectContacts);
+export type Contact = {
+  id: string;
+  name: string;
+  number: string;
+};
+
+const ContactList: React.FC = () => {
+  const items: Contact[] = useSelector(selectContacts);
   const dispatch = useDispatch();
 
-  const filteredItems = useSelector(selectFilteredcontacts);
-  const handleDelete = (id) => {
+  const filteredItems: Contact[] = useSelector(selectFilteredcontacts);
+  const handleDelete = (id: string): void => {
     dispatch(deleteContact(id));
   };
 
   return (
     <ul>
       {filteredItems.length != 0
-        ? filteredItems.map((contact) => {
+        ? filteredItems.map((contact: Contact) => {
             return (
               <Contact
                 key={contact.id}
@@ -27,7 +33,7 @@ export default function ContactList() {
               />
             );
           })
-        : items.map((contact) => {
+        : items.map((contact: Contact) => {
             return (
               <Contact
                 key={contact.id}
@@ -39,4 +45,6 @@ export default function ContactList() {
           })}
     </ul>
   );
-}
+};
+
+export default ContactList;
